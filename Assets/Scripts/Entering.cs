@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HouseAlarm))]
 public class Entering : MonoBehaviour
 {
     private HouseAlarm _houseAlarm;
@@ -13,9 +14,6 @@ public class Entering : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_houseAlarm == null) 
-            return;
-
         if (collision.TryGetComponent<Player>(out Player player))
         {
             _houseAlarm.ToggleAlarm(true);
