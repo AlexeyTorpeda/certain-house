@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class Entering : MonoBehaviour
 {
+    private HouseAlarm _houseAlarm;
+
+    private void Start()
+    {
+        _houseAlarm = GetComponent<HouseAlarm>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_houseAlarm == null) 
+            return;
+
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            HouseAlarm._houseAlarm.ToggleAlarm(true);
+            _houseAlarm.ToggleAlarm(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (_houseAlarm == null)
+            return;
+
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            HouseAlarm._houseAlarm.ToggleAlarm(false);
+            _houseAlarm.ToggleAlarm(false);
         }
     }
 }
