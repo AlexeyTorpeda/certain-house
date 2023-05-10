@@ -19,24 +19,17 @@ public class HouseAlarm : MonoBehaviour
 
     public void ToggleAlarm(bool isEnable)
     {
+        if (_changeVolumeCoroutine != null)
+            StopCoroutine(_changeVolumeCoroutine);
+
         _isAlarm = isEnable;
 
         if (_isAlarm)
         {
-            if (_changeVolumeCoroutine != null)
-            {
-                StopCoroutine(_changeVolumeCoroutine);
-            }
-
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
         }
         else
         {
-            if (_changeVolumeCoroutine != null)
-            {
-                StopCoroutine(_changeVolumeCoroutine);
-            }
-
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_minVolume));
         }
     }
