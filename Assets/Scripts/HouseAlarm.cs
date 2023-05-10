@@ -19,39 +19,20 @@ public class HouseAlarm : MonoBehaviour
 
     public void ToggleAlarm(bool isEnable)
     {
-        if (_changeVolumeCoroutine != null) 
-            StopCoroutine(_changeVolumeCoroutine);
-
-        if (_alarmAudioSource == null) 
-            return;
-
         _isAlarm = isEnable;
 
         if (_isAlarm)
         {
-            if (_changeVolumeCoroutine != null)
-            {
-                StopCoroutine(_changeVolumeCoroutine);
-            }
-
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
         }
         else
         {
-            if (_changeVolumeCoroutine != null)
-            {
-                StopCoroutine(_changeVolumeCoroutine);
-            }
-
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_minVolume));
         }
     }
 
     private IEnumerator ChangeVolume(float targetVolume)
     {
-        if (_alarmAudioSource == null) 
-            yield break;
-
         while (_alarmAudioSource.volume != targetVolume)
         {
             _alarmAudioSource.volume = Mathf.MoveTowards(_alarmAudioSource.volume, targetVolume, _volumeChangeSpeed * Time.deltaTime);
