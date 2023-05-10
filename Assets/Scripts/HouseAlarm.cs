@@ -23,10 +23,20 @@ public class HouseAlarm : MonoBehaviour
 
         if (_isAlarm)
         {
+            if (_changeVolumeCoroutine != null)
+            {
+                StopCoroutine(_changeVolumeCoroutine);
+            }
+
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
         }
         else
         {
+            if (_changeVolumeCoroutine != null)
+            {
+                StopCoroutine(_changeVolumeCoroutine);
+            }
+
             _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_minVolume));
         }
     }

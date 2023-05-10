@@ -22,9 +22,6 @@ public class Entering : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_houseAlarm == null)
-            return;
-
         if (collision.TryGetComponent<Player>(out Player player))
         {
             _houseAlarm.ToggleAlarm(false);
