@@ -24,14 +24,7 @@ public class HouseAlarm : MonoBehaviour
 
         _isAlarm = isEnable;
 
-        if (_isAlarm)
-        {
-            _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
-        }
-        else
-        {
-            _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_minVolume));
-        }
+        _changeVolumeCoroutine = StartCoroutine(ChangeVolume(_isAlarm ? _maxVolume : _minVolume));
     }
 
     private IEnumerator ChangeVolume(float targetVolume)
